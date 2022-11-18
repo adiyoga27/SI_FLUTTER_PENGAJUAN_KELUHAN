@@ -1,0 +1,49 @@
+name: ppju
+version: 1.0.0+1
+publish_to: none
+description: A new Flutter project.
+environment: 
+  sdk: '>=2.18.2 <3.0.0'
+
+dependencies: 
+  cupertino_icons: ^1.0.2
+  custom_refresh_indicator: ^2.0.1
+  carousel_slider: ^4.1.1
+  simple_animations: ^5.0.0+2
+  bottom_navy_bar: ^6.0.0
+  toast: ^0.2.9
+  get: 4.6.5
+  google_maps_flutter: ^2.2.1
+  geolocator: ^9.0.2
+  geocoder2: ^1.4.0
+  google_maps_webservice: ^0.0.1+2
+  flutter_google_places: ^0.3.0
+  fluttertoast: ^8.1.1
+  image_picker: ^0.8.6
+  permission_handler: ^10.2.0
+  get_storage: ^2.0.3 
+  google_api_headers: ^1.5.0
+  google_fonts: ^3.0.1
+  awesome_snackbar_content: ^0.1.0
+  http: ^0.13.5
+  line_awesome_flutter: ^2.0.0
+  mixins: ^0.0.6
+  cached_network_image: ^3.2.2
+  url_launcher: ^6.1.6
+  flutter: 
+    sdk: flutter
+    
+
+dev_dependencies: 
+  flutter_lints: ^2.0.0
+  flutter_test: 
+    sdk: flutter
+
+flutter: 
+  uses-material-design: true
+  assets:
+      - assets/images/background.png
+      - assets/images/clock.png
+      - assets/images/light-1.png
+      - assets/images/light-2.png
+      - assets/images/ppju.png
