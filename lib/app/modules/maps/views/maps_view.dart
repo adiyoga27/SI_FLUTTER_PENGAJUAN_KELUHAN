@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import 'package:google_api_headers/google_api_headers.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:ppju/app/modules/submission/controllers/submission_controller.dart';
 import '../controllers/maps_controller.dart';
 
 final homeScaffoldKey = GlobalKey<ScaffoldState>();
@@ -22,56 +23,55 @@ class MapsView extends GetView<MapsController> {
             IconButton(
                 icon: const Icon(Icons.search),
                 onPressed: () async {
-                  //    Prediction? p = await PlacesAutocomplete.show(
-                  //     context: context,
-                  //     apiKey: controller.kGoogleApiKey,
-                  //     onError: (response) {
-                  //       ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                  //         elevation: 0,
-                  //         behavior: SnackBarBehavior.floating,
-                  //         backgroundColor: Colors.transparent,
-                  //         content: AwesomeSnackbarContent(
-                  //           title: 'Message',
-                  //           message: response.errorMessage!,
-                  //           contentType: ContentType.failure,
-                  //         ),
-                  //       ));
-                  //     },
-                  //     mode: controller.mode,
-                  //     language: 'en',
-                  //     strictbounds: false,
-                  //     types: [""],
-                  //     decoration: InputDecoration(
-                  //         hintText: 'Search',
-                  //         focusedBorder: OutlineInputBorder(
-                  //             borderRadius: BorderRadius.circular(20),
-                  //             borderSide: BorderSide(color: Colors.white))),
-                  //     components: [
-                  //       Component(Component.country, "pk"),
-                  //       Component(Component.country, "usa")
-                  //     ]);
+                  Prediction? p = await PlacesAutocomplete.show(
+                      context: context,
+                      apiKey: controller.kGoogleApiKey,
+                      onError: (response) {
+                        ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                          elevation: 0,
+                          behavior: SnackBarBehavior.floating,
+                          backgroundColor: Colors.transparent,
+                          content: AwesomeSnackbarContent(
+                            title: 'Message',
+                            message: response.errorMessage!,
+                            contentType: ContentType.failure,
+                          ),
+                        ));
+                      },
+                      mode: controller.mode,
+                      language: 'en',
+                      strictbounds: false,
+                      types: [""],
+                      decoration: InputDecoration(
+                          hintText: 'Search',
+                          focusedBorder: OutlineInputBorder(
+                              borderRadius: BorderRadius.circular(20),
+                              borderSide: BorderSide(color: Colors.white))),
+                      components: [
+                        Component(Component.country, "pk"),
+                        Component(Component.country, "usa")
+                      ]);
 
-                  // GoogleMapsPlaces places = GoogleMapsPlaces(
-                  //     apiKey: controller.kGoogleApiKey,
-                  //     apiHeaders: await const GoogleApiHeaders().getHeaders());
+                  GoogleMapsPlaces places = GoogleMapsPlaces(
+                      apiKey: controller.kGoogleApiKey,
+                      apiHeaders: await const GoogleApiHeaders().getHeaders());
 
-                  // if(p != null){
+                  if (p != null) {
+                    // PlacesDetailsResponse detail =
+                    //     await places.getDetailsByPlaceId(p?.placeId!);
 
-                  //                 // PlacesDetailsResponse detail =
-                  //                 //     await places.getDetailsByPlaceId(p?.placeId!);
+                    // final lat = detail.result.geometry!.location.lat;
+                    // final lng = detail.result.geometry!.location.lng;
 
-                  //                 // final lat = detail.result.geometry!.location.lat;
-                  //                 // final lng = detail.result.geometry!.location.lng;
+                    // controller.markersList.clear();
+                    // controller.markersList.add(Marker(
+                    //     markerId: const MarkerId("0"),
+                    //     position: LatLng(lat, lng),
+                    //     infoWindow: InfoWindow(title: detail.result.name)));
 
-                  //                 // controller.markersList.clear();
-                  //                 // controller.markersList.add(Marker(
-                  //                 //     markerId: const MarkerId("0"),
-                  //                 //     position: LatLng(lat, lng),
-                  //                 //     infoWindow: InfoWindow(title: detail.result.name)));
-
-                  //                 // controller.googleMapController.animateCamera(
-                  //                 //     CameraUpdate.newLatLngZoom(LatLng(lat, lng), 14.0));
-                  // }
+                    // controller.googleMapController.animateCamera(
+                    //     CameraUpdate.newLatLngZoom(LatLng(lat, lng), 14.0));
+                  }
                 })
           ],
         ),

@@ -20,6 +20,13 @@ class SubmissionView extends GetView<SubmissionController> {
           backgroundColor: C.primaryColor,
           title: const Text('Form Pengajuan'),
           centerTitle: true,
+          // actions: <Widget>[
+          //   IconButton(
+          //       icon: const Icon(Icons.search),
+          //       onPressed: () async {
+          //         Get.toNamed(Routes.MAPS);
+          //       })
+          // ],
         ),
         body: ListView(
           children: [
@@ -31,23 +38,35 @@ class SubmissionView extends GetView<SubmissionController> {
                       ? SizedBox(
                           height: 10.0,
                         )
-                      : Container(
-                          height: 300.0,
-                          child: GoogleMap(
-                            initialCameraPosition: CameraPosition(
-                                target: controller.latLng, zoom: 15.0),
-                            markers: controller.markers,
-                            mapType: MapType.normal,
-                            onMapCreated: (GoogleMapController ctrl) {
-                              controller.googleMapController = ctrl;
-                            },
-                            onLongPress: (latlng) {
-                              controller.onAddMarkerButtonPressed(latlng);
-                            },
-                            gestureRecognizers: Set()
-                              ..add(Factory<EagerGestureRecognizer>(
-                                  () => EagerGestureRecognizer())),
-                          ),
+                      : Stack(
+                          children: [
+                            Container(
+                              height: 300.0,
+                              child: GoogleMap(
+                                initialCameraPosition: CameraPosition(
+                                    target: controller.latLng, zoom: 15.0),
+                                markers: controller.markers,
+                                mapType: MapType.normal,
+                                onMapCreated: (GoogleMapController ctrl) {
+                                  controller.googleMapController = ctrl;
+                                },
+                                onLongPress: (latlng) {
+                                  controller.onAddMarkerButtonPressed(latlng);
+                                },
+                                gestureRecognizers: Set()
+                                  ..add(Factory<EagerGestureRecognizer>(
+                                      () => EagerGestureRecognizer())),
+                              ),
+                            ),
+                            Positioned(
+                                bottom: 1,
+                                left: 1,
+                                child: ElevatedButton(
+                                    child: Text("Pilih Lokasi"),
+                                    onPressed: () async {
+                                      Get.toNamed(Routes.MAPS);
+                                    }))
+                          ],
                         );
                 })),
             Padding(

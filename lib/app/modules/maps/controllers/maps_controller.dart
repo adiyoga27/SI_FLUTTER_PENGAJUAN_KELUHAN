@@ -3,6 +3,7 @@ import 'package:geolocator/geolocator.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:google_maps_webservice/places.dart';
+import 'package:ppju/app/modules/submission/controllers/submission_controller.dart';
 
 class MapsController extends GetxController {
   String kGoogleApiKey = 'AIzaSyC1OvPNohzs2ylS4_G-ZVOcIRv7EovU_xg';
@@ -49,6 +50,10 @@ class MapsController extends GetxController {
         ),
         icon: BitmapDescriptor.defaultMarker,
         onTap: (() {
+          SubmissionController submissionCtrl = Get.put(SubmissionController());
+          submissionCtrl.onAddMarkerButtonPressed(locationMarker);
+          submissionCtrl.locationMarker = locationMarker;
+          submissionCtrl.latLng = locationMarker;
           Get.back(result: locationMarker);
         })));
 

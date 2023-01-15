@@ -25,7 +25,7 @@ class InitialView extends GetView<InitialController> {
               height: 25,
             ),
             const Text(
-              "IMPLEMENTASI SISTEM INFORMASI PENGADUAN PENERANGAN JALAN UMUM BERBASIS MOBILE PADA DINAS PERHUBUNGAN KABUPATEN KLUNGKUNG",
+              "SISTEM INFORMASI PENGADUAN PENERANGAN JALAN UMUM BERBASIS MOBILE PADA DINAS PERHUBUNGAN KABUPATEN KLUNGKUNG",
               style: TextStyle(
                   decorationColor: Colors.white,
                   backgroundColor: Colors.white,

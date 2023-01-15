@@ -13,8 +13,8 @@ class LoginController extends GetxController {
   late UserModel userModel;
   final box = GetStorage();
   Map<String, TextEditingController> forms = {
-    'username': TextEditingController(text: 'adiyoga27'),
-    'password': TextEditingController(text: 'bogis1996')
+    'username': TextEditingController(text: ''),
+    'password': TextEditingController(text: '')
   };
   RxBool isSubmit = false.obs;
   @override
