@@ -4,8 +4,11 @@ import 'dart:io';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_google_places/flutter_google_places.dart';
+import 'package:geocoder2/geocoder2.dart';
 import 'package:get/get.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_webservice/places.dart';
 import 'package:ppju/app/core/values/colors.dart';
 import '../controllers/submission_controller.dart';
 import 'package:ppju/app/routes/app_pages.dart';
@@ -43,8 +46,8 @@ class SubmissionView extends GetView<SubmissionController> {
                             Container(
                               height: 300.0,
                               child: GoogleMap(
-                                initialCameraPosition: CameraPosition(
-                                    target: controller.latLng, zoom: 15.0),
+                                initialCameraPosition:
+                                    controller.cameraPosition,
                                 markers: controller.markers,
                                 mapType: MapType.normal,
                                 onMapCreated: (GoogleMapController ctrl) {
@@ -64,7 +67,45 @@ class SubmissionView extends GetView<SubmissionController> {
                                 child: ElevatedButton(
                                     child: Text("Pilih Lokasi"),
                                     onPressed: () async {
-                                      Get.toNamed(Routes.MAPS);
+                                      Prediction? p =
+                                          await PlacesAutocomplete.show(
+                                              context: context,
+                                              apiKey:
+                                                  "AIzaSyC1OvPNohzs2ylS4_G-ZVOcIRv7EovU_xg",
+                                              mode: Mode
+                                                  .overlay, // Mode.fullscreen
+                                              language: "id",
+                                              types: ["(cities)"],
+                                              strictbounds: false,
+                                              components: [
+                                                new Component(
+                                                    Component.country, "id")
+                                              ]);
+                                      if (p != null) {
+                                        PlacesDetailsResponse detail =
+                                            await controller.place
+                                                .getDetailsByPlaceId(
+                                                    p.placeId.toString());
+
+                                        double? lat = detail
+                                            .result.geometry?.location.lat;
+                                        double? lng = detail
+                                            .result.geometry?.location.lng;
+                                        LatLng searchLocation =
+                                            LatLng(lat!, lng!);
+                                        controller.latLng = searchLocation;
+                                        controller.locationMarker =
+                                            searchLocation;
+                                        controller.onAddMarkerButtonPressed(
+                                            searchLocation);
+
+                                        controller.googleMapController
+                                            .moveCamera(
+                                                CameraUpdate.newCameraPosition(
+                                                    CameraPosition(
+                                                        target: searchLocation,
+                                                        zoom: 15.0)));
+                                      }
                                     }))
                           ],
                         );
@@ -251,5 +292,23 @@ class SubmissionView extends GetView<SubmissionController> {
                   backgroundColor: Colors.pink,
                 );
         }));
+  }
+
+  Future<Null> displayPrediction(Prediction p) async {
+    if (p != null) {
+      // SubmissionController submissionCtrl = Get.put(SubmissionController());
+      // PlacesDetailsResponse detail =
+      //     await submissionCtrl.place.getDetailsByPlaceId(p.placeId.toString());
+
+      // var placeId = p.placeId;
+
+      // double? lat = detail.result.geometry?.location.lat;
+      // double? lng = detail.result.geometry?.location.lng;
+
+      // var address = await Geocoder2.getDataFromCoordinates(
+      //     latitude: lat!,
+      //     longitude: lng!,
+      //     googleMapApiKey: submissionCtrl.googleMapApiKey);
+    }
   }
 }

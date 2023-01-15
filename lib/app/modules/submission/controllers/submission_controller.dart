@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:google_maps_webservice/places.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:http/http.dart' as http;
 import 'package:ppju/app/core/app_config.dart';
@@ -23,12 +24,15 @@ class SubmissionController extends GetxController {
   final String status = "pending";
   late LatLng latLng = const LatLng(-8.539010, 115.401800);
   LatLng locationMarker = const LatLng(-8.539010, 115.401800);
-
+  CameraPosition cameraPosition =
+      const CameraPosition(target: LatLng(-8.539010, 115.401800), zoom: 15.0);
   final ImagePicker imgpicker = ImagePicker();
   List<XFile>? imagefiles;
   final Set<Marker> markers = {};
   late GoogleMapController googleMapController;
-
+  late GoogleMapsPlaces place =
+      GoogleMapsPlaces(apiKey: 'AIzaSyC1OvPNohzs2ylS4_G-ZVOcIRv7EovU_xg');
+  String googleMapApiKey = "AIzaSyC1OvPNohzs2ylS4_G-ZVOcIRv7EovU_xg";
   Map<String, TextEditingController> forms = {
     'nik': TextEditingController(text: ''),
     'name': TextEditingController(text: ''),
