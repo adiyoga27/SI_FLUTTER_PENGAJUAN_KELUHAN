@@ -16,6 +16,7 @@ abstract class Routes {
   static const DETAILNEWS = _Paths.DETAILNEWS;
   static const DETAILHISTORY = _Paths.DETAILHISTORY;
   static const RESETPASSWORD = _Paths.RESETPASSWORD;
+  static const NOTIFICATION = _Paths.NOTIFICATION;
 }
 
 abstract class _Paths {
@@ -33,4 +34,5 @@ abstract class _Paths {
   static const DETAILNEWS = '/detailnews';
   static const DETAILHISTORY = '/detailhistory';
   static const RESETPASSWORD = '/resetpassword';
+  static const NOTIFICATION = '/notification';
 }

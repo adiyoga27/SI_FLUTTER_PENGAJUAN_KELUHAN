@@ -1,9 +1,7 @@
 import 'package:get/get.dart';
-import 'package:ppju/app/modules/history/views/detail_history_view.dart';
-import 'package:ppju/app/modules/news/views/detail_news_view.dart';
-import 'package:ppju/app/modules/profile/views/change_password_view.dart';
 
 import '../modules/history/bindings/history_binding.dart';
+import '../modules/history/views/detail_history_view.dart';
 import '../modules/history/views/history_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
@@ -14,8 +12,12 @@ import '../modules/login/views/login_view.dart';
 import '../modules/maps/bindings/maps_binding.dart';
 import '../modules/maps/views/maps_view.dart';
 import '../modules/news/bindings/news_binding.dart';
+import '../modules/news/views/detail_news_view.dart';
 import '../modules/news/views/news_view.dart';
+import '../modules/notification/bindings/notification_binding.dart';
+import '../modules/notification/views/notification_view.dart';
 import '../modules/profile/bindings/profile_binding.dart';
+import '../modules/profile/views/change_password_view.dart';
 import '../modules/profile/views/profile_view.dart';
 import '../modules/registration/bindings/registration_binding.dart';
 import '../modules/registration/views/registration_view.dart';
@@ -89,6 +91,11 @@ class AppPages {
       name: _Paths.RESETPASSWORD,
       page: () => const ChangePasswordView(),
       binding: ProfileBinding(),
+    ),
+    GetPage(
+      name: _Paths.NOTIFICATION,
+      page: () => const NotificationView(),
+      binding: NotificationBinding(),
     ),
   ];
 }

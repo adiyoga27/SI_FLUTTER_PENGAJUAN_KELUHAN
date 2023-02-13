@@ -49,7 +49,7 @@ class ProfileController extends GetxController {
       isSubmit.value = true;
 
       var response = await http.post(
-          Uri.https(AppConfig.apiBaseUrl, "/api/auth/change-password"),
+          Uri.http(AppConfig.apiBaseUrl, "/api/auth/change-password"),
           headers: {
             'Accept': "application/json",
             'Authorization': box.read('token')

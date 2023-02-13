@@ -37,7 +37,7 @@ class NewsController extends GetxController {
     isLoadingNews.value = true;
 
     var response = await http.get(
-      Uri.https(AppConfig.apiBaseUrl, "/api/submission/news"),
+      Uri.http(AppConfig.apiBaseUrl, "/api/submission/news"),
       headers: {
         'Accept': "application/json",
         'Authorization': box.read('token')

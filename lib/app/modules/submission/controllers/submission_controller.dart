@@ -143,7 +143,7 @@ class SubmissionController extends GetxController {
         return;
       }
       var request = http.MultipartRequest(
-          'POST', Uri.https(AppConfig.apiBaseUrl, "/api/submission"));
+          'POST', Uri.http(AppConfig.apiBaseUrl, "/api/submission"));
       request.fields.addAll({
         'hp': forms['phone']!.text,
         'complaint_village': forms['complaint_village']!.text,

@@ -30,6 +30,10 @@ dependencies:
   mixins: ^0.0.6
   cached_network_image: ^3.2.2
   url_launcher: ^6.1.6
+  firebase_messaging: ^14.2.2
+  firebase_core: ^2.5.0
+  cloud_firestore: ^4.3.2
+
   flutter: 
     sdk: flutter
     

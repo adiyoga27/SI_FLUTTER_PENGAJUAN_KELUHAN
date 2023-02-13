@@ -39,7 +39,7 @@ class RegistrationController extends GetxController {
       isSubmit.value = true;
       print(isSubmit);
       var response = await http.post(
-          Uri.https(AppConfig.apiBaseUrl, "/api/auth/registration"),
+          Uri.http(AppConfig.apiBaseUrl, "/api/auth/registration"),
           headers: {
             'Accept': "application/json"
           },

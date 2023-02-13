@@ -39,19 +39,22 @@ class HistoryController extends GetxController {
     isLoadingHistory.value = true;
 
     var response = await http.get(
-      Uri.https(AppConfig.apiBaseUrl, "/api/submission"),
+      Uri.http(AppConfig.apiBaseUrl, "/api/submission"),
       headers: {
         'Accept': "application/json",
-        'Authorization': box.read('token')
+        'Authorization': box.read('token') ?? ""
       },
     );
 
     var body = json.decode(response.body);
-    listSubmission =
-        (body['data'] as List).map((i) => SubmissionModel.fromJson(i)).toList();
-    isLoadingHistory.value = false;
-    print(listSubmission.length);
-    isLoadingHistory.refresh();
+    if (body['data'] != null) {
+      listSubmission = (body['data'] as List)
+          .map((i) => SubmissionModel.fromJson(i))
+          .toList();
+      isLoadingHistory.value = false;
+      print(listSubmission.length);
+      isLoadingHistory.refresh();
+    }
   }
 
   void viewHistory(SubmissionModel submissionModel) {

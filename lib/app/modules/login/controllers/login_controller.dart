@@ -39,7 +39,7 @@ class LoginController extends GetxController {
       isSubmit.value = true;
       print(isSubmit);
       var response = await http
-          .post(Uri.https(AppConfig.apiBaseUrl, "/api/auth/login"), body: {
+          .post(Uri.http(AppConfig.apiBaseUrl, "/api/auth/login"), body: {
         'username': forms['username']?.text,
         'password': forms['password']?.text
       });

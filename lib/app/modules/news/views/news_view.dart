@@ -6,6 +6,7 @@ import 'package:mixins/mixins.dart';
 import 'package:ppju/app/core/utils/fn.dart';
 import 'package:ppju/app/core/values/colors.dart';
 import 'package:ppju/app/model/SubmissionModel.dart';
+import 'package:ppju/app/routes/app_pages.dart';
 
 import '../controllers/news_controller.dart';
 
@@ -18,6 +19,15 @@ class NewsView extends GetView<NewsController> {
         backgroundColor: C.primaryColor,
         title: const Text('Berita'),
         centerTitle: true,
+        actions: <Widget>[
+          IconButton(
+            icon: Icon(Icons.notifications),
+            onPressed: () {
+              Get.toNamed(Routes.NOTIFICATION);
+              // Show notifications
+            },
+          ),
+        ],
       ),
       body: Obx(() {
         bool isLoadingNews = controller.isLoadingNews.value;
