@@ -44,7 +44,7 @@ class AboutView extends GetView<ProfileController> {
                             children: [
                               Row(
                                 children: [
-                                  Icon(Icons.whatsapp),
+                                  Icon(Icons.wechat_sharp),
                                   SizedBox(
                                     width: 10,
                                   ),

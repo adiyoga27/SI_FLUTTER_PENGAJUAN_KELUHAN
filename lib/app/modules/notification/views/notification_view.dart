@@ -17,25 +17,22 @@ class NotificationView extends GetView<NotificationController> {
           stream: FirebaseFirestore.instance
               .collection("notifications")
               .snapshots(),
-          builder: (context, snapshot) {
-            if (!snapshot.hasData) {
+          builder: (context, snap) {
+            // if connection is waiting
+            if (snap.connectionState == ConnectionState.waiting) {
               return Center(child: CircularProgressIndicator());
             }
-            QuerySnapshot querySnapshot = snapshot.data as QuerySnapshot;
-            if (querySnapshot != null) {
-              return ListView.builder(
-                itemCount: querySnapshot.docs.length,
-                itemBuilder: (context, index) {
-                  DocumentSnapshot documentSnapshot = querySnapshot.docs[index];
-                  var data = documentSnapshot.data();
+            QuerySnapshot querySnapshot = snap.data as QuerySnapshot;
 
-                  return ListTile(
-                    title: Text(data['title'].toString()),
-                    subtitle: Text(data['description']),
-                  );
-                },
-              );
-            }
+            return ListView.builder(
+              itemCount: querySnapshot.docs.length,
+              itemBuilder: (context, index) {
+                return ListTile(
+                  title: Text(querySnapshot.docs[index]["title"]),
+                  subtitle: Text(querySnapshot.docs[index]["body"]),
+                );
+              },
+            );
           },
         ));
   }

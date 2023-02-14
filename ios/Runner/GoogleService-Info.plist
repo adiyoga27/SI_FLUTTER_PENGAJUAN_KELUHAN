@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>CLIENT_ID</key>
+	<string>1036529293371-8s3gjh1v7msi7ejcproc7b82mbj0j5sh.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1036529293371-8s3gjh1v7msi7ejcproc7b82mbj0j5sh</string>
+	<key>ANDROID_CLIENT_ID</key>
+	<string>1036529293371-450vjjpeejq57fuldmpnn5b9rqq846sl.apps.googleusercontent.com</string>
+	<key>API_KEY</key>
+	<string>AIzaSyAmtKyxHfTcKTRmStsfMJxsYTCbUwSmuXc</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1036529293371</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>com.codingaja.penerangan</string>
+	<key>PROJECT_ID</key>
+	<string>penerangan-ff752</string>
+	<key>STORAGE_BUCKET</key>
+	<string>penerangan-ff752.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<false></false>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false></false>
+	<key>IS_APPINVITE_ENABLED</key>
+	<true></true>
+	<key>IS_GCM_ENABLED</key>
+	<true></true>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true></true>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1036529293371:ios:b0932bd6f40b82f653a41e</string>
+</dict>
+</plist>
