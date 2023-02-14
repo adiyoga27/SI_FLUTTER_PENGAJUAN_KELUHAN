@@ -1,4 +1,5 @@
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
@@ -6,6 +7,7 @@ import 'package:mixins/mixins.dart';
 import 'package:ppju/app/core/utils/fn.dart';
 import 'package:ppju/app/core/values/colors.dart';
 import 'package:ppju/app/model/SubmissionModel.dart';
+import 'package:ppju/app/modules/notification/controllers/notification_controller.dart';
 import 'package:ppju/app/routes/app_pages.dart';
 
 import '../controllers/news_controller.dart';
@@ -14,18 +16,49 @@ class NewsView extends GetView<NewsController> {
   const NewsView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
+    final ctrlNotif = Get.put(NotificationController());
+
     return Scaffold(
       appBar: AppBar(
         backgroundColor: C.primaryColor,
         title: const Text('Berita'),
         centerTitle: true,
         actions: <Widget>[
-          IconButton(
-            icon: Icon(Icons.notifications),
-            onPressed: () {
-              Get.toNamed(Routes.NOTIFICATION);
-              // Show notifications
-            },
+          Stack(
+            children: [
+              IconButton(
+                icon: Icon(Icons.notifications),
+                onPressed: () {
+                  Get.toNamed(Routes.NOTIFICATION);
+                  // Show notifications
+                },
+              ),
+              ctrlNotif.countNotif.length > 0
+                  ? Positioned(
+                      right: 8,
+                      top: 8,
+                      child: Container(
+                        padding: EdgeInsets.all(2),
+                        decoration: BoxDecoration(
+                          color: Colors.red,
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        constraints: BoxConstraints(
+                          minWidth: 16,
+                          minHeight: 16,
+                        ),
+                        child: Text(
+                          "${ctrlNotif.countNotif.length}",
+                          style: TextStyle(
+                            color: Colors.white,
+                            fontSize: 10,
+                          ),
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    )
+                  : SizedBox(),
+            ],
           ),
         ],
       ),

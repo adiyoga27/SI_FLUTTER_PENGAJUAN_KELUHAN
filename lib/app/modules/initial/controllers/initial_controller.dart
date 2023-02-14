@@ -9,6 +9,7 @@ import 'package:permission_handler/permission_handler.dart';
 import 'package:ppju/app/core/app_config.dart';
 import 'package:ppju/app/model/SubmissionModel.dart';
 import 'package:ppju/app/modules/history/controllers/history_controller.dart';
+import 'package:ppju/app/modules/notification/controllers/notification_controller.dart';
 import 'package:ppju/app/routes/app_pages.dart';
 import 'package:http/http.dart' as http;
 

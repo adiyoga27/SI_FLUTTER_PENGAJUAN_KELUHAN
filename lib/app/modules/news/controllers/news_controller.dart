@@ -1,11 +1,13 @@
 import 'dart:convert';
 
 import 'package:carousel_slider/carousel_controller.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:get/get.dart';
 import 'package:get_storage/get_storage.dart';
 import 'package:ppju/app/core/app_config.dart';
 import 'package:ppju/app/model/SubmissionModel.dart';
 import 'package:http/http.dart' as http;
+import 'package:ppju/app/modules/notification/controllers/notification_controller.dart';
 import 'package:ppju/app/routes/app_pages.dart';
 
 class NewsController extends GetxController {
@@ -16,14 +18,21 @@ class NewsController extends GetxController {
   late List<SubmissionModel> listSubmission = [];
   RxInt indicator = 1.obs;
   RxBool isLoadingNews = false.obs;
+  final collection = FirebaseFirestore.instance.collection("notifications");
+  late Future<int> countingNotif;
+  final ctrlNotif = Get.put(NotificationController());
+
   @override
   void onInit() {
     super.onInit();
+    ctrlNotif.getCount();
   }
 
   @override
   void onReady() async {
     super.onReady();
+    ctrlNotif.getCount();
+
     await getNews();
   }
 
