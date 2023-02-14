@@ -12,6 +12,7 @@ import 'app/routes/app_pages.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
 
   SystemChrome.setSystemUIOverlayStyle(SystemUiOverlayStyle(
     statusBarColor: Colors.transparent, // transparent status bar
@@ -19,7 +20,6 @@ void main() async {
   if (defaultTargetPlatform == TargetPlatform.android) {
     AndroidGoogleMapsFlutter.useAndroidViewSurface = true;
   }
-  await Firebase.initializeApp();
 
   runApp(
     GetMaterialApp(
