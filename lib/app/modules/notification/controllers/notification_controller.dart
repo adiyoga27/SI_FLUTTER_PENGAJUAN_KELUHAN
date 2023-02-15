@@ -7,6 +7,7 @@ import 'package:ppju/app/core/app_config.dart';
 import 'package:ppju/app/model/SubmissionModel.dart';
 import 'package:ppju/app/modules/history/controllers/history_controller.dart';
 import 'package:http/http.dart' as http;
+import 'package:ppju/app/modules/news/controllers/news_controller.dart';
 
 class NotificationController extends GetxController {
   //TODO: Implement NotificationController
@@ -15,19 +16,17 @@ class NotificationController extends GetxController {
   final ctrlHistory = Get.put(HistoryController());
   final count = 0.obs;
   final collection = FirebaseFirestore.instance.collection("notifications");
-  final List countNotif = [];
+  RxList countNotif = [].obs;
 
   var token = "";
   @override
   void onInit() {
     super.onInit();
-    getCount();
   }
 
   @override
   void onReady() {
     super.onReady();
-    getCount();
   }
 
   @override
@@ -48,6 +47,8 @@ class NotificationController extends GetxController {
 
     var body = json.decode(response.body);
     if (body['data'] != null) {
+      final ctrlNews = Get.put(NewsController());
+      ctrlNews.getNotif();
       SubmissionModel submissionModel = SubmissionModel.fromJson(body['data']);
       return ctrlHistory.viewHistory(submissionModel);
     }
@@ -55,18 +56,5 @@ class NotificationController extends GetxController {
 
   String getNik() {
     return box.read('user')['nik'];
-  }
-
-  getCount() {
-    final notif = collection
-        .where('to', isEqualTo: box.read('user')['nik'].toString())
-        .snapshots();
-    notif.listen((event) {
-      event.docs.forEach((element) {
-        print(element.toString());
-        countNotif.add(element.data());
-      });
-    });
-    update();
   }
 }

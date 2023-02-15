@@ -20,6 +20,7 @@ class InitialController extends GetxController {
 
   final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
   final _historyController = Get.put(HistoryController());
+  final _notifController = Get.put(NotificationController());
   @override
   void onInit() {
     super.onInit();

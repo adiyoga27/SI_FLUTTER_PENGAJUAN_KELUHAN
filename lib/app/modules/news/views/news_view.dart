@@ -16,50 +16,53 @@ class NewsView extends GetView<NewsController> {
   const NewsView({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    final ctrlNotif = Get.put(NotificationController());
-
+    bool isLoadingNotif = controller.isLoadingNotif.value;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: C.primaryColor,
         title: const Text('Berita'),
         centerTitle: true,
         actions: <Widget>[
-          Stack(
-            children: [
-              IconButton(
-                icon: Icon(Icons.notifications),
-                onPressed: () {
-                  Get.toNamed(Routes.NOTIFICATION);
-                  // Show notifications
-                },
-              ),
-              ctrlNotif.countNotif.length > 0
-                  ? Positioned(
-                      right: 8,
-                      top: 8,
-                      child: Container(
-                        padding: EdgeInsets.all(2),
-                        decoration: BoxDecoration(
-                          color: Colors.red,
-                          borderRadius: BorderRadius.circular(10),
-                        ),
-                        constraints: BoxConstraints(
-                          minWidth: 16,
-                          minHeight: 16,
-                        ),
-                        child: Text(
-                          "${ctrlNotif.countNotif.length}",
-                          style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 10,
-                          ),
-                          textAlign: TextAlign.center,
-                        ),
-                      ),
-                    )
-                  : SizedBox(),
-            ],
-          ),
+          Obx(
+            () => Stack(
+              children: [
+                IconButton(
+                  icon: Icon(Icons.notifications),
+                  onPressed: () {
+                    Get.toNamed(Routes.NOTIFICATION);
+                    // Show notifications
+                  },
+                ),
+                !isLoadingNotif
+                    ? controller.countNotif.length > 0
+                        ? Positioned(
+                            right: 8,
+                            top: 8,
+                            child: Container(
+                              padding: EdgeInsets.all(2),
+                              decoration: BoxDecoration(
+                                color: Colors.red,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              constraints: BoxConstraints(
+                                minWidth: 16,
+                                minHeight: 16,
+                              ),
+                              child: Text(
+                                "${controller.countNotif.length}",
+                                style: TextStyle(
+                                  color: Colors.white,
+                                  fontSize: 10,
+                                ),
+                                textAlign: TextAlign.center,
+                              ),
+                            ),
+                          )
+                        : SizedBox()
+                    : SizedBox(),
+              ],
+            ),
+          )
         ],
       ),
       body: Obx(() {

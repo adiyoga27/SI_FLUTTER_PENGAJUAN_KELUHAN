@@ -18,20 +18,20 @@ class NewsController extends GetxController {
   late List<SubmissionModel> listSubmission = [];
   RxInt indicator = 1.obs;
   RxBool isLoadingNews = false.obs;
+  RxBool isLoadingNotif = false.obs;
   final collection = FirebaseFirestore.instance.collection("notifications");
   late Future<int> countingNotif;
   final ctrlNotif = Get.put(NotificationController());
+  RxList countNotif = [].obs;
 
   @override
   void onInit() {
     super.onInit();
-    ctrlNotif.getCount();
   }
 
   @override
   void onReady() async {
     super.onReady();
-    ctrlNotif.getCount();
 
     await getNews();
   }
@@ -57,7 +57,7 @@ class NewsController extends GetxController {
     listSubmission =
         (body['data'] as List).map((i) => SubmissionModel.fromJson(i)).toList();
     isLoadingNews.value = false;
-    print(listSubmission.length);
+    getNotif();
     isLoadingNews.refresh();
   }
 
@@ -69,5 +69,27 @@ class NewsController extends GetxController {
   void slide(int index) {
     indicator.value = index;
     indicator.refresh();
+  }
+
+  void getNotif() {
+    countNotif.clear();
+    List<String> whereNotInList = [];
+    whereNotInList.add(box.read('user')['nik']);
+    isLoadingNotif.value = true;
+    final notif = collection
+        // .where('read_by', whereNotIn: whereNotInList)
+        .where('to', isEqualTo: box.read('user')['nik'].toString())
+        .snapshots();
+
+    notif.listen((event) {
+      event.docs.forEach((e) {
+        List readers = (e['read_by'] ?? []) as List;
+        if (!readers.contains(box.read('user')['nik'].toString())) {
+          countNotif.add(e.data());
+        }
+      });
+    });
+    isLoadingNotif.value = false;
+    setState() {}
   }
 }

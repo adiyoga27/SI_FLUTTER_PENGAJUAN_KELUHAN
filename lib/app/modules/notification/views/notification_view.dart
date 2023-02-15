@@ -35,14 +35,22 @@ class NotificationView extends GetView<NotificationController> {
             return ListView.builder(
               itemCount: querySnapshot.docs.length,
               itemBuilder: (context, index) {
+                List readers =
+                    (querySnapshot.docs[index]['read_by'] ?? []) as List;
+
                 return Card(
                   elevation: 5,
-                  margin: EdgeInsets.symmetric(vertical: 5),
+                  margin: EdgeInsets.symmetric(vertical: 3),
                   child: Padding(
-                    padding: const EdgeInsets.symmetric(vertical: 8.0),
+                    padding: const EdgeInsets.symmetric(
+                      vertical: 10.0,
+                    ),
                     child: ListTile(
                       leading: CircleAvatar(
-                        backgroundColor: Colors.grey[200],
+                        backgroundColor: !readers
+                                .contains(box.read('user')['nik'].toString())
+                            ? Colors.blue[50]
+                            : Colors.white,
                         radius: 30,
                         child: const Icon(
                           Icons.notifications,
